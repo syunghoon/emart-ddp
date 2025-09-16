@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -10,6 +11,31 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Local fonts
+const pretendard = localFont({
+  src: [
+    {
+      path: "../public/fonts/PretendardVariable.woff2",
+      style: "normal",
+      weight: "100 900",
+    },
+  ],
+  display: "swap",
+  variable: "--font-pretendard",
+});
+
+const ohsquare = localFont({
+  src: [
+    {
+      path: "../public/fonts/Cafe24Ohsquare-v2.0.woff2",
+      style: "normal",
+      weight: "400",
+    },
+  ],
+  display: "swap",
+  variable: "--font-ohsquare",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +51,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${pretendard.variable} ${ohsquare.variable} antialiased`}
       >
-        {children}
+        <div className="kiosk-viewport">
+          <div className="kiosk-canvas  bg-[#171047]">{children}</div>
+        </div>
       </body>
     </html>
   );

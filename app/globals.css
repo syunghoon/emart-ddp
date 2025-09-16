@@ -8,7 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  /* Use Pretendard as default sans; keep Geist Mono for code */
+  --font-sans: var(--font-pretendard);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -22,5 +23,50 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Default to Pretendard via --font-sans */
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Noto Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
+
+/* Viewport + scalable typography and kiosk base */
+html {
+  height: 100%;
+  /* Scale text with viewport, but keep sensible bounds */
+  font-size: clamp(14px, 1.8vmin, 28px);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden; /* prevent scroll in kiosk */
+}
+
+/* Box sizing reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Kiosk letterbox wrapper for 139:244 portrait ratio */
+.kiosk-viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000; /* letterbox area */
+}
+
+.kiosk-canvas {
+  /* Fit inside viewport while preserving 139:244 */
+  width: min(100vw, calc(100vh * 139 / 244));
+  height: min(100vh, calc(100vw * 244 / 139));
+  aspect-ratio: 139 / 244;
+  overflow: hidden;
+}
+
+/* Helper class to apply Ohsquare font when needed */
+.font-ohsquare {
+  font-family: var(--font-ohsquare), var(--font-sans), ui-sans-serif, system-ui,
+    -apple-system, Segoe UI, Roboto, Noto Sans, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
 }

@@ -1,103 +1,87 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="relative flex flex-col items-center w-full h-full px-[3vh] pt-[4vh] pb-[3vh] text-white">
+      {/* Top: logo placeholder */}
+      <div className="w-[30vh] h-[6vh] rounded-[1.6vh] bg-white/10 border border-white/15 flex items-center justify-center text-white/60">
+        로고 자리
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Headline */}
+      <div className="mt-[3vh] text-center leading-[1.1] flex gap-1.5">
+        <p className="font-ohsquare text-[1.9rem] font-extrabold">건강하게</p>
+        <p className="font-ohsquare text-[1.9rem] font-extrabold">먹어봤니</p>
+      </div>
+
+      {/* Hero: hexagon centered; static -30deg rotation (animation later) */}
+      <div className="relative mt-[12vh] w-full flex items-center justify-center origin-center rotate-[-30deg]">
+        <div className="relative w-[44vh] h-[44vh]">
+          {/* Hexagon placeholder (clip-path) */}
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vh] h-[30vh] bg-white/15 border border-white/20"
+            style={{
+              clipPath:
+                "polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)",
+            }}
+          />
+
+          {/* Three squares rotating around the hexagon center at 60° steps */}
+          <div
+            className="absolute left-1/2 top-1/2 w-[22vh] h-[22vh] bg-white/10 border border-white/20 rounded-[2.2vh]"
+            style={{
+              transform:
+                "translate(-50%, -50%) rotate(-60deg) translateX(16vh) rotate(0deg)",
+            }}
+          />
+          <div
+            className="absolute left-1/2 top-1/2 w-[22vh] h-[22vh] bg-white/10 border border-white/20 rounded-[2.2vh]"
+            style={{
+              transform:
+                "translate(-50%, -50%) rotate(0deg) translateX(16vh) rotate(0deg)",
+            }}
+          />
+          <div
+            className="absolute left-1/2 top-1/2 w-[22vh] h-[22vh] bg-white/10 border border-white/20 rounded-[2.2vh]"
+            style={{
+              transform:
+                "translate(-50%, -50%) rotate(60deg) translateX(16vh) rotate(0deg)",
+            }}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      {/* Bottom CTA with improved speech-bubble above it */}
+      <div className="mt-auto w-full relative">
+        {/* Coupon speech bubble */}
+        <div className="absolute -top-[7vh] left-1/2 -translate-x-1/2 z-10">
+          <div className="relative px-[2.4vh] py-[1.4vh] w-full rounded-lg bg-white/12 backdrop-blur-md border border-white/30 text-[1.05rem] shadow-[0_0.6vh_1.6vh_rgba(0,0,0,0.25)]">
+            어디까지 먹어봤니?
+            {/* Tail: layered triangles to simulate border */}
+            <div className="absolute left-1/2 -bottom-[1.25vh] -translate-x-1/2">
+              <div
+                className="relative"
+                style={{ width: "2.8vh", height: "1.8vh" }}
+              >
+                <div
+                  className="absolute inset-0 bg-white/30"
+                  style={{ clipPath: "polygon(50% 100%, 0 0, 100% 0)" }}
+                />
+                <div
+                  className="absolute inset-[0.2vh] bg-white/12 backdrop-blur-md"
+                  style={{ clipPath: "polygon(50% 100%, 0 0, 100% 0)" }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Link href="/test" aria-label="내 취향 테스트 시작">
+          <button className="relative z-0 w-full py-[2.2vh] rounded-full bg-white text-[#160449] font-ohsquare text-[1.4rem] font-extrabold shadow-[0_0.8vh_2vh_rgba(0,0,0,0.35)]">
+            내 취향 테스트
+          </button>
+        </Link>
+      </div>
+    </main>
   );
 }

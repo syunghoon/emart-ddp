@@ -5,24 +5,24 @@ export default function Home() {
         <main
             className="relative flex flex-col items-center w-full h-full
         bg-gradient-to-b from-[#150348] to-[#3308AE]
-        px-[3vh] pt-[4vh] pb-[3vh] text-white"
+        px-[7.2vh] pt-[6.6vh] pb-[7.2vh] text-white"
         >
             <div>
                 <img
                     src="/assets/e-logo.svg"
-                    className="h-[3.6vh] opacity-80"
+                    className="h-[3.1vh] opacity-80"
                     alt=""
                 />
             </div>
 
             {/* Headline */}
-            <div className="flex flex-col font-ohsquare mt-[3vh] text-center leading-[1.1] gap-1.5">
+            <div className="flex flex-col font-ohsquare mt-[2.4vh] text-center leading-[1] gap-[0.6vh]">
                 <p className="text-[6.8vh]">마구와구</p>
                 <p className="text-[6.8vh]">먹어봤니</p>
             </div>
 
             {/* Hero: hexagon centered; static -30deg rotation (animation later) */}
-            <div className="relative mt-[12vh] w-full flex items-center justify-center origin-center rotate-[-30deg]">
+            <div className="relative mt-[12vh] w-full flex items-center justify-center origin-center rotate-[-90deg]">
                 <div className="relative w-[44vh] h-[44vh]">
                     {/* Hexagon placeholder (clip-path) */}
                     <div
@@ -58,43 +58,18 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Bottom CTA with improved speech-bubble above it */}
-            <div className="mt-auto w-full relative">
-                {/* Coupon speech bubble */}
-                <div className="absolute -top-[7vh] left-1/2 -translate-x-1/2 z-10">
-                    <div className="relative px-[2.4vh] py-[1.4vh] w-full rounded-lg bg-white/12 backdrop-blur-md border border-white/30 text-[1.05rem] shadow-[0_0.6vh_1.6vh_rgba(0,0,0,0.25)]">
-                        어디까지 먹어봤니?
-                        {/* Tail: layered triangles to simulate border */}
-                        <div className="absolute left-1/2 -bottom-[1.25vh] -translate-x-1/2">
-                            <div
-                                className="relative"
-                                style={{ width: "2.8vh", height: "1.8vh" }}
-                            >
-                                <div
-                                    className="absolute inset-0 bg-white/30"
-                                    style={{
-                                        clipPath:
-                                            "polygon(50% 100%, 0 0, 100% 0)",
-                                    }}
-                                />
-                                <div
-                                    className="absolute inset-[0.2vh] bg-white/12 backdrop-blur-md"
-                                    style={{
-                                        clipPath:
-                                            "polygon(50% 100%, 0 0, 100% 0)",
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {/* Fixed Footer */}
+            <footer className="fixed bottom-0 left-0 w-full px-[7.2vh] pb-[12vh] bg-transparent">
+                <p className="text-[3vh] font-ohsquare text-center pb-[4vh]">
+                    하하하하하
+                </p>
 
                 <Link href="/test" aria-label="내 취향 테스트 시작">
-                    <button className="relative z-0 w-full py-[2.2vh] rounded-full bg-white text-[#160449] font-ohsquare text-[1.4rem] font-extrabold shadow-[0_0.8vh_2vh_rgba(0,0,0,0.35)]">
+                    <button className="text-[3vh] font-ohsquare w-full py-[2.2vh] rounded-full bg-white text-[#160449]">
                         내 취향 테스트
                     </button>
                 </Link>
-            </div>
+            </footer>
         </main>
     );
 }

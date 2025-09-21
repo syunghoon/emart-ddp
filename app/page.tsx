@@ -5,12 +5,12 @@ export default function Home() {
         <main
             className="relative flex flex-col items-center w-full h-full
         bg-gradient-to-b from-[#150348] to-[#3308AE]
-         pt-[6.6vh] px-[7.2vh] pb-[7.2vh] text-white"
+        px-[7.2vh] text-white "
         >
             <div>
                 <img
                     src="/assets/e-logo.svg"
-                    className="h-[3.1vh] opacity-80"
+                    className="mt-[6.6vh] h-[3.1vh] opacity-80"
                     alt=""
                 />
             </div>
@@ -22,34 +22,36 @@ export default function Home() {
             </div>
 
             {/* Hero: hexagon centered; static -30deg rotation (animation later) */}
-            <div className="relative mt-[18vh] w-full flex items-center justify-center origin-center">
+            <div className="relative mt-[16vh] w-full flex items-center justify-center origin-center">
                 <div className="relative w-[44vh] h-[44vh]">
-                    <div
-                        className="absolute left-1/2 top-1/2 w-[30vh] h-[30vh] bg-white/10 border border-white/20 rounded-[2.2vh]"
+                    <img
+                        src="/assets/smsm-card.png"
+                        className="absolute left-1/2 top-1/2 w-[28vh] h-[28vh] rounded-[2.2vh] shadow-2xl"
                         style={{
                             transform:
-                                "translate(-50%, -50%) rotate(-150deg) translateX(20vh) rotate(0deg)",
+                                "translate(-60%, -50%) rotate(-150deg) translateX(20vh) rotate(90deg)",
                         }}
                     />
-                    <div
-                        className="absolute left-1/2 top-1/2 w-[33vh] h-[33vh] bg-white/10 border border-white/20 rounded-[2.2vh]"
+                    <img
+                        src="/assets/misik-card.png"
+                        className="absolute left-1/2 top-1/2 w-[28vh] h-[28vh] rounded-[2.2vh] shadow-2xl"
                         style={{
                             transform:
-                                "translate(-50%, -50%) rotate(-90deg) translateX(16vh) rotate(0deg)",
+                                "translate(-40%, -50%) rotate(-30deg) translateX(20vh) rotate(90deg)",
                         }}
                     />
-                    <div
-                        className="absolute left-1/2 top-1/2 w-[30vh] h-[30vh] bg-white/10 border border-white/20 rounded-[2.2vh]"
+                    <img
+                        src="/assets/magu-card.png"
+                        className="absolute left-1/2 top-1/2 w-[33vh] h-[33vh] rounded-[2.2vh] shadow-2xl"
                         style={{
                             transform:
-                                "translate(-50%, -50%) rotate(-30deg) translateX(20vh) rotate(0deg)",
+                                "translate(-50%, -50%) rotate(-90deg) translateX(16vh) rotate(90deg)",
                         }}
                     />
                 </div>
             </div>
 
-            {/* Fixed Footer */}
-            <footer className="fixed bottom-0 left-0 w-full px-[7.2vh] pb-[12vh] bg-transparent">
+            <footer className="absolute bottom-0 left-0 w-full px-[7.2vh] mb-[12vh] bg-transparent">
                 <p className="text-[2.4vh] font-pretendard leading-[1.2] text-center pb-[1.8vh]">
                     디저트 취향을 찾아드려요!
                 </p>

@@ -4,154 +4,183 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const questions = [
-  {
-    id: 1,
-    topText: "평소에 생각이 적은 편이다",
-    bottomText: "평소에 생각이 많은 편이다",
-    type: "1",
-  },
-  {
-    id: 2,
-    topText: "싸고 맛있어 놀라는 과자",
-    bottomText: "비싸도 납득되는 과자",
-    type: "1",
-  },
-  {
-    id: 3,
-    topText: "특별한 경험을 주는 프리미엄 디저트가 끌린다",
-    bottomText: "가볍게 즐기는 친근한 디저트가 끌린다",
-    type: "2",
-  },
-  {
-    id: 4,
-    topText: "나는 디저트에 진심이다",
-    bottomText: "디저트는 즐겨 먹지 않는다",
-    type: "2",
-  },
-  {
-    id: 5,
-    topText: "칼로리 먼저 따져보는 편이다",
-    bottomText: "눈길 끌면 바로 집는 편이다",
-    type: "3",
-  },
-  {
-    id: 6,
-    topText: "재료 본연의 맛이 담긴 제품을 추구한다",
-    bottomText: "가공되어 자극적인 맛의 제품을 추구한다",
-    type: "3",
-  },
+    {
+        id: 1,
+        question: "카페에 갔을 때 디저트는?",
+        leftLabel: "안 먹는다",
+        rightLabel: "꼭 시킨다",
+        type: "1",
+    },
+    {
+        id: 2,
+        question: "디저트를 고른다면?",
+        leftLabel: "익숙한 것",
+        rightLabel: "특별한 것",
+        type: "1",
+    },
+    {
+        id: 3,
+        question: "평소에 나는?",
+        leftLabel: "생각이 많다",
+        rightLabel: "단순하다",
+        type: "1",
+    },
+    {
+        id: 4,
+        question: "과자를 고를 때 나는?",
+        leftLabel: "퀄리티 먼저",
+        rightLabel: "가성비 먼저",
+        type: "1",
+    },
+    {
+        id: 5,
+        question: "과자 고를 때 내 시선은?",
+        leftLabel: "포장 / 가격",
+        rightLabel: "칼로리 정보",
+        type: "1",
+    },
+    {
+        id: 6,
+        question: "더 끌리는 맛은?",
+        leftLabel: "속세의 맛",
+        rightLabel: "담백한 맛",
+        type: "1",
+    },
 ];
 
 const choices = [
-  { value: 5, size: "w-[10vh] h-[10vh]" }, // 가장 큼
-  { value: 4, size: "w-[8vh] h-[8vh]" },
-  { value: 3, size: "w-[6vh] h-[6vh]" },
-  { value: 2, size: "w-[8vh] h-[8vh]" },
-  { value: 1, size: "w-[10vh] h-[10vh]" }, // 가장 큼
+    { value: 5, size: "w-[9.6vh] h-[9.6vh]" }, // 가장 큼
+    { value: 4, size: "w-[6.3vh] h-[6.3vh]" },
+    { value: 3, size: "w-[4vh] h-[4vh]" },
+    { value: 2, size: "w-[6.3vh] h-[6.3vh]" },
+    { value: 1, size: "w-[9.6vh] h-[9.6vh]" }, // 가장 큼
 ];
 
 export default function TestPage() {
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<(number | null)[]>(
-    Array(questions.length).fill(null)
-  );
-  const router = useRouter();
+    const [index, setIndex] = useState(0);
+    const [answers, setAnswers] = useState<(number | null)[]>(
+        Array(questions.length).fill(null)
+    );
+    const router = useRouter();
 
-  const progress = useMemo(() => (index / questions.length) * 100, [index]);
-  const selectedChoice = answers[index];
+    const progress = useMemo(() => (index / questions.length) * 100, [index]);
+    const selectedChoice = answers[index];
 
-  function handleAnswer(choice: number) {
-    const next = [...answers];
-    next[index] = choice;
-    setAnswers(next);
-    setTimeout(() => {
-      if (index + 1 < questions.length) {
-        setIndex(index + 1);
-      } else {
-        // Calculate scores by type
-        const totals: { [key: string]: number } = {};
-        next.forEach((val, i) => {
-          if (val != null) {
-            const t = questions[i].type;
-            totals[t] = (totals[t] ?? 0) + val;
-          }
-        });
-        const max = Math.max(...Object.values(totals));
-        const top = Object.keys(totals).filter((k) => totals[k] === max);
-        const resultType = top[Math.floor(Math.random() * top.length)];
-        router.push(`/result/${resultType}`);
-      }
-    }, 400);
-  }
+    function handleAnswer(choice: number) {
+        const next = [...answers];
+        next[index] = choice;
+        setAnswers(next);
+        setTimeout(() => {
+            if (index + 1 < questions.length) {
+                setIndex(index + 1);
+            } else {
+                // Calculate scores by type
+                const totals: { [key: string]: number } = {};
+                next.forEach((val, i) => {
+                    if (val != null) {
+                        const t = questions[i].type;
+                        totals[t] = (totals[t] ?? 0) + val;
+                    }
+                });
+                const max = Math.max(...Object.values(totals));
+                const top = Object.keys(totals).filter(
+                    (k) => totals[k] === max
+                );
+                const resultType = top[Math.floor(Math.random() * top.length)];
+                router.push(`/result/${resultType}`);
+            }
+        }, 400);
+    }
 
-  function handlePrev() {
-    if (index > 0) setIndex(index - 1);
-  }
+    function handlePrev() {
+        if (index > 0) setIndex(index - 1);
+    }
 
-  return (
-    <main className="relative flex flex-col items-center justify-between w-full h-full p-[3vh] text-white">
-      {/* Home button at top */}
-      <div className="absolute top-[2vh] right-[2vh] z-10">
-        <button
-          onClick={() => router.push("/")}
-          className="flex items-center gap-[1vh] px-[2vh] py-[1.2vh] rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/15 transition-colors"
+    return (
+        <main
+            className="relative flex flex-col items-center w-full h-full 
+            bg-[#160449] bg-[url('/test-bg.svg')] bg-no-repeat bg-center bg-cover 
+            px-[7.2vh] text-white"
         >
-          <span className="text-[1.1rem] font-semibold">홈</span>
-        </button>
-      </div>
-      {/* Top header */}
-      <div className="w-full flex flex-col items-center gap-[2vh] mt-[2vh]">
-        <p className="text-[2rem] font-extrabold">Q{index + 1}</p>
-        <div className="w-[24vh] h-[1.2vh] rounded-full bg-[#3a2a6a]/80 overflow-hidden">
-          <div
-            className="h-full bg-[#FFCA2C] transition-all duration-500"
-            style={{ width: `${Math.max(4, progress)}%` }}
-          />
-        </div>
-      </div>
+            <div className="absolute top-[3.6vh] right-[3vh] z-10">
+                <button
+                    onClick={() => router.push("/")}
+                    className="flex items-center gap-[1vh] px-[1.2vh] py-[1.2vh] rounded-full bg-white/20 hover:bg-white/15 transition-colors"
+                >
+                    <img src="/cancle.svg" className="h-[3.6vh]" alt="" />
+                </button>
+            </div>
 
-      {/* Middle content with hourglass-like band */}
-      <div className="relative w-full flex-1 flex flex-col items-center justify-center gap-[4vh]">
-        <p className="text-[1.6rem] font-bold text-center leading-snug px-[4vw]">
-          {questions[index].topText}
-        </p>
+            {/* Top header */}
+            <div className="w-full flex flex-col items-center gap-[0.6vh] mt-[6vh]">
+                <p className="font-ohsquare text-[3.6vh] leading-1.4">
+                    Q{index + 1}
+                </p>
+                <div className="w-[12vh] h-[2.1vh] bg-white/20 overflow-hidden">
+                    <div
+                        className="h-full bg-[#515DFF] transition-all duration-500"
+                        style={{ width: `${Math.max(4, progress)}%` }}
+                    />
+                </div>
+            </div>
 
-        <div className="relative flex flex-col items-center gap-[3.4vh]">
-          {choices.map((c) => (
-            <button
-              key={c.value}
-              onClick={() => handleAnswer(c.value)}
-              className={`relative flex items-center justify-center rounded-full border-[0.8vh] transition-all duration-300 ${
-                c.size
-              } ${
-                selectedChoice === c.value
-                  ? "border-[#c8b6ff]"
-                  : "border-[#c8b6ff]/60"
-              }`}
-            >
-              {selectedChoice === c.value && (
-                <span className="absolute w-[80%] h-[80%] rounded-full bg-[#c8b6ff]/70"></span>
-              )}
-            </button>
-          ))}
-        </div>
+            <div className="w-full mt-[10.2vh]">
+                <p className="text-[3.3vh] font-semibold text-center leading-[1.4]">
+                    {questions[index].question}
+                </p>
 
-        <p className="text-[1.6rem] font-bold text-center leading-snug px-[4vw]">
-          {questions[index].bottomText}
-        </p>
-      </div>
+                <div className="mt-[20vh] flex flex-row justify-center w-[42vh] gap-[1.8vh]">
+                    {choices.map((c) => (
+                        <div className="" key={c.value}>
+                            <div className="h-[9.6vh] flex items-center justify-center">
+                                <button
+                                    onClick={() => handleAnswer(c.value)}
+                                    className={`relative flex items-center justify-center rounded-full border-[0.5vh] transition-all duration-300 ${
+                                        c.size
+                                    } ${
+                                        selectedChoice === c.value
+                                            ? "border-[#D6C8FF]/80"
+                                            : "border-[#D6C8FF]"
+                                    }`}
+                                >
+                                    {selectedChoice === c.value && (
+                                        <img
+                                            src="/radio-checked.png"
+                                            className="absolute w-[90%] h-[90%] rounded-full"
+                                            alt=""
+                                        />
+                                    )}
+                                </button>
+                            </div>
 
-      {/* Bottom actions */}
-      <div className="w-full flex items-center justify-center mb-[2vh]">
-        <button
-          onClick={handlePrev}
-          disabled={index === 0}
-          className="flex items-center gap-[1vh] px-[3vh] py-[1.6vh] rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-          <span className="text-[1.6rem] leading-none">←</span>
-          <span className="text-[1.2rem] font-semibold">이전</span>
-        </button>
-      </div>
-    </main>
-  );
+                            <div className="flex w-full justify-center items-center text-center overflow-visible">
+                                {(c.value === 5 || c.value === 1) && (
+                                    <div className="relative w-[9.6vh]">
+                                        <span className="absolute left-1/2 -translate-x-1/2 mt-[1.8vh] text-[2.4vh] leading-1.4 font-medium whitespace-nowrap">
+                                            {c.value === 5
+                                                ? questions[index].leftLabel
+                                                : questions[index].rightLabel}
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <footer className="absolute justify-center flex bottom-0 left-0 w-full px-[7.2vh] mb-[12vh] bg-transparent">
+                <button
+                    onClick={handlePrev}
+                    disabled={index === 0}
+                    className="flex items-center gap-[0.9vh] px-[2.4vh] py-[1.5vh] rounded-full bg-white/20 backdrop-blur-md disabled:opacity-40"
+                >
+                    <img src="/line+arrow.svg" className="h-[3.6vh]" alt="" />
+                    <span className="text-[2.7vh] leading-1.3 font-semibold">
+                        이전
+                    </span>
+                </button>
+            </footer>
+        </main>
+    );
 }

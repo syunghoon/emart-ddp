@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { ResultInfo } from "./resultData";
 import { useRouter } from "next/navigation";
+import ExitModal from "@/app/components/exitModal";
 
 type ResultDetailProps = {
     result: ResultInfo;
@@ -9,10 +10,11 @@ type ResultDetailProps = {
 
 const ResultDetail: React.FC<ResultDetailProps> = ({ result }) => {
     const router = useRouter();
+    const [showExitModal, setShowExitModal] = useState(false);
 
     return (
         <div
-            className="relative flex flex-col items-center w-full min-h-screen !overflow-y-auto
+            className="relative flex flex-col items-center w-full min-h-screen
         bg-gradient-to-b from-[#150348] to-[#3308AE]
         px-[3.6vh] text-white"
         >
@@ -141,6 +143,16 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ result }) => {
                     </button>
                 </Link>
             </footer> */}
+
+            {/* 홈 이동 확인 모달 */}
+            {showExitModal && (
+                <div className="fixed inset-0 z-[100]">
+                    <ExitModal
+                        onCancel={() => setShowExitModal(false)}
+                        onConfirm={() => router.push("/")}
+                    />
+                </div>
+            )}
         </div>
     );
 };

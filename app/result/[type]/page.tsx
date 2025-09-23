@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import ResultCard from "./resultCard";
 import ResultDetail from "./resultDetail";
 import { resultData, ResultInfo } from "./resultData";
 
@@ -28,7 +29,7 @@ export default function ResultPage() {
 
     return (
         <main className="h-full">
-            {/* {step === "card" && <ResultCard />} */}
+            {step === "card" && <ResultCard result={result} />}
             {step === "detail" && <ResultDetail result={result} />}
         </main>
     );

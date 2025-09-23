@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { useParams, useRouter } from "next/navigation";
+import ExitModal from "@/app/components/exitModal";
+import LoadModal from "@/app/components/loadModal";
 
 export default function PhotoPage() {
     const webcamRef = useRef<Webcam>(null);
@@ -12,6 +14,7 @@ export default function PhotoPage() {
     const [isReady, setIsReady] = useState(false);
     const [preCountdown, setPreCountdown] = useState(10);
     const [showExitModal, setShowExitModal] = useState(false);
+    const [showLoadModal, setShowLoadModal] = useState(false);
 
     // 프레임 경로 (예: /frame-1.png)
     const framePath = `/frame-${params.type}.png`;
@@ -82,17 +85,19 @@ export default function PhotoPage() {
         setIsReady(false);
     }
 
-    function save() {
-        if (!captured) return;
-        const a = document.createElement("a");
-        a.href = captured;
-        a.download = `${params.type}_photo.png`;
-        a.click();
-    }
+    // function save() {
+    //     if (!captured) return;
+    //     const a = document.createElement("a");
+    //     a.href = captured;
+    //     a.download = `${params.type}_photo.png`;
+    //     a.click();
+    // }
 
     function printImage() {
         // 단순 페이지 인쇄 트리거. 필요 시 프린트 전용 오버레이로 확장 가능.
         window.print();
+        setShowLoadModal(true);
+        setTimeout(() => router.push("/"), 10000);
     }
 
     return (
@@ -148,7 +153,7 @@ export default function PhotoPage() {
                         </button>
                     </div>
                     {/* 캡처 프리뷰 (프레임 포함) */}
-                    <div className="relative aspect-[3/4] mt-[12vh] w-[90%] z-10">
+                    <div className="relative aspect-[3/4] mt-[12vh] w-[90%]">
                         <img
                             src={captured}
                             alt="Captured"
@@ -189,43 +194,18 @@ export default function PhotoPage() {
 
             {/* 홈 이동 확인 모달 */}
             {showExitModal && (
-                <div className="fixed inset-0 z-[100]">
-                    {/* Dim + blur */}
-                    <div
-                        className="absolute inset-0 bg-black/55 backdrop-blur-sm"
-                        onClick={() => setShowExitModal(false)}
+                <div className="inset-0 z-100">
+                    <ExitModal
+                        onCancel={() => setShowExitModal(false)}
+                        onConfirm={() => router.push("/")}
                     />
-                    {/* Icon badge */}
-                    <div className="absolute left-1/2 top-[34%] -translate-x-1/2 -translate-y-full w-[9vh] h-[9vh] rounded-full bg-[#271257] border-4 border-white/85 flex items-center justify-center text-white text-[2rem] shadow-[0_0.6vh_1.6vh_rgba(0,0,0,0.4)]">
-                        !
-                    </div>
-                    {/* Card */}
-                    <div className="absolute left-1/2 top-[36%] -translate-x-1/2 w-[86%] max-w-[460px] rounded-[2.2vh] bg-white shadow-[0_1.4vh_3vh_rgba(0,0,0,0.45)] overflow-hidden">
-                        <div className="px-[2.6vh] pt-[2.6vh] pb-[2vh] text-center">
-                            <h3 className="font-ohsquare text-[#160449] text-[1.55rem] font-extrabold leading-tight">
-                                테스트를
-                                <br /> 종료하시겠어요?
-                            </h3>
-                            <p className="mt-[1.2vh] text-[1.02rem] text-black/60 leading-snug">
-                                지금까지 입력한 내용이 사라지고
-                                <br /> 메인 화면으로 돌아가요
-                            </p>
-                        </div>
-                        <div className="grid grid-cols-2">
-                            <button
-                                onClick={() => setShowExitModal(false)}
-                                className="py-[2vh] bg-[#F4F4F7] text-[#160449] font-semibold"
-                            >
-                                계속하기
-                            </button>
-                            <button
-                                onClick={() => router.push("/")}
-                                className="py-[2vh] bg-[#160449] text-white font-semibold"
-                            >
-                                종료하기
-                            </button>
-                        </div>
-                    </div>
+                </div>
+            )}
+
+            {/* 결과 페이지 이동 모달 */}
+            {showLoadModal && (
+                <div className="inset-0 z-100">
+                    <LoadModal type="printing" />
                 </div>
             )}
         </main>

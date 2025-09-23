@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import ExitModal from "@/app/components/exitModal";
+import LoadModal from "@/app/components/loadModal";
 
 const questions = [
     {
@@ -23,28 +25,28 @@ const questions = [
         question: "평소에 나는?",
         leftLabel: "생각이 많다",
         rightLabel: "단순하다",
-        type: "1",
+        type: "2",
     },
     {
         id: 4,
         question: "과자를 고를 때 나는?",
         leftLabel: "퀄리티 먼저",
         rightLabel: "가성비 먼저",
-        type: "1",
+        type: "2",
     },
     {
         id: 5,
         question: "과자 고를 때 내 시선은?",
         leftLabel: "포장 / 가격",
         rightLabel: "칼로리 정보",
-        type: "1",
+        type: "3",
     },
     {
         id: 6,
         question: "더 끌리는 맛은?",
         leftLabel: "속세의 맛",
         rightLabel: "담백한 맛",
-        type: "1",
+        type: "3",
     },
 ];
 
@@ -57,6 +59,8 @@ const choices = [
 ];
 
 export default function TestPage() {
+    const [showExitModal, setShowExitModal] = useState(false);
+    const [showLoadModal, setShowLoadModal] = useState(false);
     const [index, setIndex] = useState(0);
     const [answers, setAnswers] = useState<(number | null)[]>(
         Array(questions.length).fill(null)
@@ -82,6 +86,7 @@ export default function TestPage() {
                         totals[t] = (totals[t] ?? 0) + val;
                     }
                 });
+                setShowLoadModal(true);
                 const max = Math.max(...Object.values(totals));
                 const top = Object.keys(totals).filter(
                     (k) => totals[k] === max
@@ -104,13 +109,13 @@ export default function TestPage() {
         >
             <div className="absolute top-[3.6vh] right-[3vh] z-10">
                 <button
-                    onClick={() => router.push("/")}
+                    onClick={() => setShowExitModal(true)}
+                    aria-label="홈으로"
                     className="flex items-center gap-[1vh] px-[1.2vh] py-[1.2vh] rounded-full bg-white/20 hover:bg-white/15 transition-colors"
                 >
                     <img src="/cancle.svg" className="h-[3.6vh]" alt="" />
                 </button>
             </div>
-
             {/* Top header */}
             <div className="w-full flex flex-col items-center gap-[0.6vh] mt-[6vh]">
                 <p className="font-ohsquare text-[3.6vh] leading-1.4">
@@ -123,7 +128,6 @@ export default function TestPage() {
                     />
                 </div>
             </div>
-
             <div className="w-full mt-[10.2vh]">
                 <p className="text-[3.3vh] font-semibold text-center leading-[1.4]">
                     {questions[index].question}
@@ -135,7 +139,7 @@ export default function TestPage() {
                             <div className="h-[9.6vh] flex items-center justify-center">
                                 <button
                                     onClick={() => handleAnswer(c.value)}
-                                    className={`relative flex items-center justify-center rounded-full border-[0.5vh] transition-all duration-300 ${
+                                    className={`relative flex items-center justify-center rounded-full border-[0.5vh] transition-all duration-100 ${
                                         c.size
                                     } ${
                                         selectedChoice === c.value
@@ -156,7 +160,7 @@ export default function TestPage() {
                             <div className="flex w-full justify-center items-center text-center overflow-visible">
                                 {(c.value === 5 || c.value === 1) && (
                                     <div className="relative w-[9.6vh]">
-                                        <span className="absolute left-1/2 -translate-x-1/2 mt-[1.8vh] text-[2.4vh] leading-1.4 font-medium whitespace-nowrap">
+                                        <span className="absolute left-1/2 -translate-x-1/2 font-pretendard mt-[1.8vh] text-[2.4vh] leading-1.4 font-medium whitespace-nowrap">
                                             {c.value === 5
                                                 ? questions[index].leftLabel
                                                 : questions[index].rightLabel}
@@ -168,7 +172,6 @@ export default function TestPage() {
                     ))}
                 </div>
             </div>
-
             <footer className="absolute justify-center flex bottom-0 left-0 w-full px-[7.2vh] mb-[12vh] bg-transparent">
                 <button
                     onClick={handlePrev}
@@ -176,11 +179,28 @@ export default function TestPage() {
                     className="flex items-center gap-[0.9vh] px-[2.4vh] py-[1.5vh] rounded-full bg-white/20 backdrop-blur-md disabled:opacity-40"
                 >
                     <img src="/line+arrow.svg" className="h-[3.6vh]" alt="" />
-                    <span className="text-[2.7vh] leading-1.3 font-semibold">
+                    <span className="font-pretendard text-[2.7vh] leading-1.3 font-semibold">
                         이전
                     </span>
                 </button>
             </footer>
+
+            {/* 홈 이동 확인 모달 */}
+            {showExitModal && (
+                <div className="inset-0 z-100">
+                    <ExitModal
+                        onCancel={() => setShowExitModal(false)}
+                        onConfirm={() => router.push("/")}
+                    />
+                </div>
+            )}
+
+            {/* 결과 페이지 이동 모달 */}
+            {showLoadModal && (
+                <div className="inset-0 z-100">
+                    <LoadModal type="loading" />
+                </div>
+            )}
         </main>
     );
 }

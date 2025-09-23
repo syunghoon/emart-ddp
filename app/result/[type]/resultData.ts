@@ -12,6 +12,7 @@ export type ResultInfo = {
     id: number;
     title: string;
     titleGradient: [string, string];
+    titleCardUrl: string;
     brandColor: string;
     descriptionTitle: string;
     description: string;
@@ -25,6 +26,7 @@ export const resultData: Record<string, ResultInfo> = {
         id: 1,
         title: "미식고집",
         titleGradient: ["#FFFFFF", "#FFAE8C"],
+        titleCardUrl: "/results/misik-card.png",
         brandColor: "#FF4D50",
         descriptionTitle: "피코크",
         description:
@@ -67,6 +69,7 @@ export const resultData: Record<string, ResultInfo> = {
         id: 2,
         title: "마구와구",
         titleGradient: ["#FFFFFF", "#FFFC48"],
+        titleCardUrl: "/results/magu-card.png",
         brandColor: "#FFBE20",
         descriptionTitle: "오케이프라이스",
         description:
@@ -108,6 +111,7 @@ export const resultData: Record<string, ResultInfo> = {
         id: 3,
         title: "슴슴한입",
         titleGradient: ["#FFFFFF", "#61FFCE"],
+        titleCardUrl: "/results/smsm-card.png",
         brandColor: "#20BBAC",
         descriptionTitle: "자연주의",
         description:

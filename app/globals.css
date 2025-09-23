@@ -18,10 +18,12 @@
 
 .font-pretendard {
     font-family: "Pretendard", sans-serif;
+    letter-spacing: -0.02em;
 }
 
 .font-ohsquare {
     font-family: "Ohsquare", sans-serif;
+    letter-spacing: -0.02em;
 }
 
 :root {

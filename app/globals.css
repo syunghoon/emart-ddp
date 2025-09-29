@@ -65,3 +65,26 @@ body {
     aspect-ratio: 9 / 16;
     overflow: hidden;
 }
+
+@keyframes ribbonExpand {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes cardRiseSpin {
+    0% {
+        transform: translate(-50%, 150%) rotateY(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotateY(360deg);
+        opacity: 1;
+    }
+}

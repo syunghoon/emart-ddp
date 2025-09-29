@@ -121,7 +121,15 @@ export default function TestPage() {
                 <p className="font-ohsquare text-[3.6vh] leading-1.4">
                     Q{index + 1}
                 </p>
-                <div className="w-[12vh] h-[2.1vh] bg-white/20 overflow-hidden">
+                <div
+                    className="w-[12vh] h-[2.1vh] bg-white/20 overflow-hidden
+                                [mask-image:url('/assets/mask-vector.svg')]
+                                [mask-repeat:no-repeat]
+                                [mask-size:cover]
+                                [-webkit-mask-image:url('/assets/mask-vector.svg')]
+                                [-webkit-mask-repeat:no-repeat]
+                                [-webkit-mask-size:cover]"
+                >
                     <div
                         className="h-full bg-[#515DFF] transition-all duration-500"
                         style={{ width: `${Math.max(4, progress)}%` }}

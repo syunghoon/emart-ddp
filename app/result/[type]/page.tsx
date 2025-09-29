@@ -23,7 +23,7 @@ export default function ResultPage() {
         };
 
     useEffect(() => {
-        const timer = setTimeout(() => setStep("detail"), 1000);
+        const timer = setTimeout(() => setStep("detail"), 2000);
         return () => clearTimeout(timer);
     }, []);
 

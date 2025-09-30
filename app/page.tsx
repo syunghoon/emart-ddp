@@ -9,7 +9,7 @@ type CardOrder = [CardId, CardId, CardId];
 const POSITIONS = ["left", "center", "right"] as const;
 type Position = (typeof POSITIONS)[number];
 
-const ROTATION_INTERVAL = 2500;
+const ROTATION_INTERVAL = 5000;
 
 const CARDS: Record<CardId, { image: string; label: string }> = {
     magu: { image: "/assets/magu-card.png", label: "마구와구" },

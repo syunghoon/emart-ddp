@@ -158,7 +158,7 @@ export default function TestPage() {
                                     {selectedChoice === c.value && (
                                         <img
                                             src="/assets/radio-checked.png"
-                                            className="absolute w-[90%] h-[90%] rounded-full"
+                                            className="absolute w-[90%] h-[90%] rounded-full opacity-90"
                                             alt=""
                                         />
                                     )}

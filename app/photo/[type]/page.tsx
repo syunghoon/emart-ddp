@@ -57,9 +57,9 @@ export default function PhotoPage() {
         img.src = screenshot;
 
         Promise.all([img.decode(), frame.decode()]).then(() => {
-            // 375x500(3:4)으로 합성
-            const width = 375;
-            const height = 500;
+            //(3:4)으로 합성
+            const width = 750;
+            const height = 1000;
             const canvas = document.createElement("canvas");
             canvas.width = width;
             canvas.height = height;
@@ -112,8 +112,8 @@ export default function PhotoPage() {
                             screenshotFormat="image/png"
                             className="absolute inset-0 w-full h-full object-cover"
                             videoConstraints={{
-                                width: 375,
-                                height: 500,
+                                width: 750,
+                                height: 1000,
                                 facingMode: "user",
                             }}
                             style={{ transform: "scaleX(-1)" }}

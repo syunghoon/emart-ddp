@@ -1,16 +1,37 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Webcam from "react-webcam";
 import { useParams, useRouter } from "next/navigation";
+import Webcam from "react-webcam";
+import { supabase } from "@/lib/supabaseClient";
+
 import ExitModal from "@/app/components/exitModal";
 import LoadModal from "@/app/components/loadModal";
+
 import PrintOverlay from "./printOverlay";
+
+function dataURLtoBlob(dataUrl: string) {
+    const arr = dataUrl.split(",");
+    const mime = arr[0].match(/:(.*?);/)?.[1] || "image/png";
+    const bstr = atob(arr[1]); // base64 → 바이너리 문자열
+
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new Blob([u8arr], { type: mime });
+}
 
 export default function PhotoPage() {
     const webcamRef = useRef<Webcam>(null);
+
     const params = useParams<{ type: string }>();
+
     const router = useRouter();
+
     const [captured, setCaptured] = useState<string | null>(null);
     const [isReady, setIsReady] = useState(false);
     const [preCountdown, setPreCountdown] = useState(10);
@@ -19,6 +40,8 @@ export default function PhotoPage() {
 
     // 프레임 경로 (예: /frame-1.png)
     const framePath = `/frame-${params.type}.png`;
+
+    useEffect(() => {});
 
     // 준비되면 10초 카운트다운 후 자동 촬영 (모달 열리면 일시중지)
     useEffect(() => {
@@ -94,11 +117,23 @@ export default function PhotoPage() {
     //     a.click();
     // }
 
-    function printImage() {
+    async function printImage() {
         // 단순 페이지 인쇄 트리거. 필요 시 프린트 전용 오버레이로 확장 가능.
+        setShowLoadModal(true);
+        if (captured) {
+            const fileBlob = dataURLtoBlob(captured);
+
+            const fileName = `${crypto.randomUUID()}.png`;
+            const { data, error } = await supabase.storage
+                .from("photos")
+                .upload(`captures/${fileName}`, fileBlob, {
+                    contentType: "image/png",
+                });
+
+            console.log("uploaded:", data, error);
+        }
         window.print();
-        // setShowLoadModal(true);
-        // setTimeout(() => router.push("/"), 10000);
+        setTimeout(() => router.push("/"), 10000);
     }
 
     return (

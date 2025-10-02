@@ -5,6 +5,7 @@ import Webcam from "react-webcam";
 import { useParams, useRouter } from "next/navigation";
 import ExitModal from "@/app/components/exitModal";
 import LoadModal from "@/app/components/loadModal";
+import PrintOverlay from "./printOverlay";
 
 export default function PhotoPage() {
     const webcamRef = useRef<Webcam>(null);
@@ -96,8 +97,8 @@ export default function PhotoPage() {
     function printImage() {
         // 단순 페이지 인쇄 트리거. 필요 시 프린트 전용 오버레이로 확장 가능.
         window.print();
-        setShowLoadModal(true);
-        setTimeout(() => router.push("/"), 10000);
+        // setShowLoadModal(true);
+        // setTimeout(() => router.push("/"), 10000);
     }
 
     return (
@@ -139,7 +140,7 @@ export default function PhotoPage() {
 
             {captured && (
                 <>
-                    <div className="absolute top-[3.6vh] right-[3vh] z-10">
+                    <div className="no-print absolute top-[3.6vh] right-[3vh] z-10">
                         <button
                             onClick={() => setShowExitModal(true)}
                             aria-label="홈으로"
@@ -153,7 +154,7 @@ export default function PhotoPage() {
                         </button>
                     </div>
                     {/* 캡처 프리뷰 (프레임 포함) */}
-                    <div className="relative aspect-[3/4] mt-[12vh] w-[90%]">
+                    <div className="no-print relative aspect-[3/4] mt-[12vh] w-[90%]">
                         <img
                             src={captured}
                             alt="Captured"
@@ -181,7 +182,7 @@ export default function PhotoPage() {
                             </span>
                         </button>
                     </div>
-                    <footer className="absolute bottom-0 left-0 w-full px-[7.2vh] mb-[6vh] bg-transparent">
+                    <footer className="no-print absolute bottom-0 left-0 w-full px-[7.2vh] mb-[6vh] bg-transparent">
                         <button
                             onClick={printImage}
                             className="text-[3.6vh] font-ohsquare w-full py-[1.4vh] leading-[1.28] rounded-full bg-white text-[#160449]"
@@ -189,6 +190,7 @@ export default function PhotoPage() {
                             사진 출력하기
                         </button>
                     </footer>
+                    <PrintOverlay imageUrl={captured} />
                 </>
             )}
 

@@ -88,3 +88,43 @@ body {
         opacity: 1;
     }
 }
+
+@media screen {
+    .print-only {
+        display: none;
+    }
+}
+
+@media print {
+    @page {
+        size: 3in auto;
+        margin: 0.1in;
+    }
+    html,
+    body,
+    .kiosk-canvas,
+    .kiosk-viewport {
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+        aspect-ratio: unset;
+    }
+    .print-only {
+        display: flex !important;
+        position: static !important;
+        inset: auto !important;
+        width: 100%;
+        min-height: auto;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0.5in;
+    }
+    .print-only img {
+        width: 100%;
+        height: auto;
+        page-break-inside: avoid;
+    }
+    .no-print {
+        display: none;
+    }
+}

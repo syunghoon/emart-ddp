@@ -3,27 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Webcam from "react-webcam";
-import { supabase } from "@/lib/supabaseClient";
+import { QRCodeCanvas } from "qrcode.react";
 
 import ExitModal from "@/app/components/exitModal";
 import LoadModal from "@/app/components/loadModal";
 
 import PrintOverlay from "./printOverlay";
-
-function dataURLtoBlob(dataUrl: string) {
-    const arr = dataUrl.split(",");
-    const mime = arr[0].match(/:(.*?);/)?.[1] || "image/png";
-    const bstr = atob(arr[1]); // base64 → 바이너리 문자열
-
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-
-    return new Blob([u8arr], { type: mime });
-}
+import { uploadPhoto } from "./uploadPhoto";
 
 export default function PhotoPage() {
     const webcamRef = useRef<Webcam>(null);
@@ -38,10 +24,11 @@ export default function PhotoPage() {
     const [showExitModal, setShowExitModal] = useState(false);
     const [showLoadModal, setShowLoadModal] = useState(false);
 
+    const [qrUrl, setQrUrl] = useState<string | undefined>(undefined);
+    const [showPrint, setShowPrint] = useState(false);
+
     // 프레임 경로 (예: /frame-1.png)
     const framePath = `/frame-${params.type}.png`;
-
-    useEffect(() => {});
 
     // 준비되면 10초 카운트다운 후 자동 촬영 (모달 열리면 일시중지)
     useEffect(() => {
@@ -109,32 +96,21 @@ export default function PhotoPage() {
         setIsReady(false);
     }
 
-    // function save() {
-    //     if (!captured) return;
-    //     const a = document.createElement("a");
-    //     a.href = captured;
-    //     a.download = `${params.type}_photo.png`;
-    //     a.click();
-    // }
-
     async function printImage() {
-        // 단순 페이지 인쇄 트리거. 필요 시 프린트 전용 오버레이로 확장 가능.
+        if (!captured) return;
         setShowLoadModal(true);
-        if (captured) {
-            const fileBlob = dataURLtoBlob(captured);
-
-            const fileName = `${crypto.randomUUID()}.png`;
-            const { data, error } = await supabase.storage
-                .from("photos")
-                .upload(`captures/${fileName}`, fileBlob, {
-                    contentType: "image/png",
-                });
-
-            console.log("uploaded:", data, error);
-        }
-        window.print();
-        setTimeout(() => router.push("/"), 10000);
+        const url = await uploadPhoto(captured); // Supabase 업로드 함수
+        setQrUrl(url ?? undefined);
+        setShowPrint(true); // 여기서는 프린트 호출하지 않음
     }
+
+    useEffect(() => {
+        if (!showPrint || !qrUrl) return;
+        window.print();
+        setShowPrint(false);
+        // setShowLoadModal(false);
+        setTimeout(() => router.push("/"), 10000);
+    }, [showPrint, qrUrl]);
 
     return (
         <main className="relative flex flex-col items-center h-screen bg-[#150348]">
@@ -225,13 +201,13 @@ export default function PhotoPage() {
                             사진 출력하기
                         </button>
                     </footer>
-                    <PrintOverlay imageUrl={captured} />
+                    <PrintOverlay imageUrl={captured} qrUrl={qrUrl ?? ""} />
                 </>
             )}
 
             {/* 홈 이동 확인 모달 */}
             {showExitModal && (
-                <div className="inset-0 z-100">
+                <div className="inset-0 z-100 no-print">
                     <ExitModal
                         onCancel={() => setShowExitModal(false)}
                         onConfirm={() => router.push("/")}
@@ -241,7 +217,7 @@ export default function PhotoPage() {
 
             {/* 결과 페이지 이동 모달 */}
             {showLoadModal && (
-                <div className="inset-0 z-100">
+                <div className="inset-0 z-100 no-print">
                     <LoadModal type="printing" />
                 </div>
             )}

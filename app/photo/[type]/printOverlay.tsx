@@ -1,21 +1,25 @@
 "use client";
 
+import { QRCodeCanvas } from "qrcode.react";
+
 interface PrintOverlayProps {
     imageUrl: string;
-    qrUrl?: string;
+    qrUrl?: string | null; // null 허용
 }
 
 export default function PrintOverlay({ imageUrl, qrUrl }: PrintOverlayProps) {
-    console.log("PRINTED");
     return (
-        <div className="print-only flex flex-col items-center justify-start">
+        <div className="print-only flex flex-col items-center justify-center w-full">
             <img src="/test/test_result_top.svg" alt="" />
-            <img src={imageUrl} alt="photo" />
-            <img src="/test/test_result_bottom.svg" alt="" />
-            {/* 촬영된 사진 */}
 
-            {/* QR 코드 (옵션) */}
-            {/* {qrUrl && <img src={qrUrl} alt="QR" className="w-[20%] mt-[2vh]" />} */}
+            {/* 사진 출력 */}
+            <img src={imageUrl} alt="photo" />
+            <div className="flex justify-between">
+                <img src="/test/test_result_bottom.svg" alt="" />
+
+                {/* QR 코드 출력 */}
+                {qrUrl && <QRCodeCanvas value={qrUrl} className="w-30%" />}
+            </div>
         </div>
     );
 }

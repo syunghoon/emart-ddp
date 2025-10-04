@@ -119,11 +119,6 @@ body {
         justify-content: flex-start;
         gap: 0.5in;
     }
-    .print-only img {
-        width: 100%;
-        height: auto;
-        page-break-inside: avoid;
-    }
     .no-print {
         display: none;
     }

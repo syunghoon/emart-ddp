@@ -15,12 +15,12 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ result }) => {
     return (
         <div
             className="relative flex flex-col items-center w-full min-h-screen
-        bg-gradient-to-b from-[#150348] to-[#3308AE]
-        px-[3.6vh] text-white"
+                        bg-gradient-to-b from-[#150348] to-[#3308AE]
+                        px-[3.6vh] text-white"
         >
-            <div className="absolute top-[3.6vh] right-[3vh] z-10">
+            <div className="absolute top-[3.6vh] right-[3vh] z-1">
                 <button
-                    onClick={() => router.push("/")}
+                    onClick={() => setShowExitModal(true)}
                     className="flex items-center gap-[1vh] px-[1.2vh] py-[1.2vh] rounded-full bg-white/20 hover:bg-white/15 transition-colors"
                 >
                     <img src="/cancle.svg" className="h-[3.6vh]" alt="" />
@@ -51,19 +51,19 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ result }) => {
             <img
                 src={result.images[0].imageUrl}
                 alt="left decoration"
-                className={`absolute left-[75%] top-[1%] -translate-x-1/2 -translate-y-1/2 ${result.images[0].size} pointer-events-none select-none`}
+                className={`absolute left-[75%] top-[1%] ${result.images[0].size} pointer-events-none select-none decor-float`}
             />
 
             <img
                 src={result.images[1].imageUrl}
                 alt="right decoration"
-                className={`absolute left-[5%] top-[12%] -translate-x-1/2 -translate-y-1/2 ${result.images[1].size} pointer-events-none select-none`}
+                className={`absolute left-[5%] top-[12%] ${result.images[1].size} pointer-events-none select-none decor-float decor-float-delay`}
             />
 
             <img
                 src={result.images[2].imageUrl}
                 alt="character"
-                className={`absolute left-[90%] top-[25%] -translate-x-1/2 -translate-y-1/2 ${result.images[2].size} object-contain pointer-events-none select-none`}
+                className={`absolute left-[90%] top-[25%] ${result.images[2].size} object-contain pointer-events-none select-none character-peek`}
             />
 
             {/* Description */}

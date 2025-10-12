@@ -12,7 +12,7 @@ export default function ExitModal({ onCancel, onConfirm }: ExitModalProps) {
         <div>
             {/* Dim + blur */}
             <div
-                className="kiosk-canvas absolute inset-0 bg-black/55 backdrop-blur-sm"
+                className="absolute inset-0 bg-black/55 backdrop-blur-sm"
                 onClick={onCancel}
             />
 

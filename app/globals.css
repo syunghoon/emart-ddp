@@ -89,6 +89,46 @@ body {
     }
 }
 
+.decor-float {
+    animation: decorFloat 8s ease-in-out infinite both;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+}
+
+.decor-float-delay {
+    animation-delay: 1.8s;
+}
+
+.character-peek {
+    animation: characterPeek 5.5s ease-in-out infinite both;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 85%;
+    will-change: transform;
+}
+
+@keyframes decorFloat {
+    0%,
+    100% {
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        transform: translate(-50%, calc(-50% - 5vh));
+    }
+}
+
+@keyframes characterPeek {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(-1deg);
+    }
+    33% {
+        transform: translate(calc(-50% - 2vh), -50%) rotate(-6deg);
+    }
+    66% {
+        transform: translate(calc(-50% - 1vh), -50%) rotate(-3deg);
+    }
+}
+
 @media screen {
     .print-only {
         display: none;

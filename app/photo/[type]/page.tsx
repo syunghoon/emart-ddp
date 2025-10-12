@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Webcam from "react-webcam";
-import { QRCodeCanvas } from "qrcode.react";
 
 import ExitModal from "@/app/components/exitModal";
 import LoadModal from "@/app/components/loadModal";
@@ -157,11 +156,7 @@ export default function PhotoPage() {
                             aria-label="홈으로"
                             className="flex items-center gap-[1vh] px-[1.2vh] py-[1.2vh] rounded-full bg-white/20 hover:bg-white/15 transition-colors"
                         >
-                            <img
-                                src="/cancle.svg"
-                                className="h-[3.6vh]"
-                                alt=""
-                            />
+                            <img src="/cancle.svg" className="h-[3.6vh]" />
                         </button>
                     </div>
                     {/* 캡처 프리뷰 (프레임 포함) */}

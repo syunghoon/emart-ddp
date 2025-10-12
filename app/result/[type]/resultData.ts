@@ -60,7 +60,7 @@ export const resultData: Record<string, ResultInfo> = {
         dessertGradient: ["#FFD761", "#FF4D50", "#480303"],
         images: [
             { imageUrl: "/results/misik-left.png", size: "w-[13vh]" },
-            { imageUrl: "/results/misik-right.png", size: "w-[30vh]" },
+            { imageUrl: "/results/misik-right.png", size: "w-[25vh]" },
             { imageUrl: "/results/misik-character.png", size: "w-[30vh]" },
         ],
     },
@@ -102,8 +102,8 @@ export const resultData: Record<string, ResultInfo> = {
         ],
         dessertGradient: ["#FFFC48", "#FFB81C", "#480C03"],
         images: [
-            { imageUrl: "/results/magu-left.png", size: "w-[13vh]" },
-            { imageUrl: "/results/magu-right.png", size: "w-[20vh]" },
+            { imageUrl: "/results/magu-left.png", size: "w-[12vh]" },
+            { imageUrl: "/results/magu-right.png", size: "w-[28vh]" },
             { imageUrl: "/results/magu-character.png", size: "w-[30vh]" },
         ],
     },
@@ -144,8 +144,8 @@ export const resultData: Record<string, ResultInfo> = {
         ],
         dessertGradient: ["#61FFCE", "#20BBAC", "#150348"],
         images: [
-            { imageUrl: "/results/smsm-left.png", size: "w-[10vh]" },
-            { imageUrl: "/results/smsm-right.png", size: "w-[25vh]" },
+            { imageUrl: "/results/smsm-left.png", size: "w-[11vh]" },
+            { imageUrl: "/results/smsm-right.png", size: "w-[20vh]" },
             { imageUrl: "/results/smsm-character.png", size: "w-[30vh]" },
         ],
     },

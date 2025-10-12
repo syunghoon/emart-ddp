@@ -11,10 +11,10 @@ type Position = (typeof POSITIONS)[number];
 
 const ROTATION_INTERVAL = 5000;
 
-const CARDS: Record<CardId, { image: string; label: string }> = {
-    magu: { image: "/assets/magu-card.png", label: "마구와구" },
-    smsm: { image: "/assets/smsm-card.png", label: "슴슴한입" },
-    misik: { image: "/assets/misik-card.png", label: "미식고집" },
+const CARDS: Record<CardId, { image: string; label: string; color: string }> = {
+    magu: { image: "/assets/magu-card.png", label: "마구와구", color: "#FFBE20" },
+    smsm: { image: "/assets/smsm-card.png", label: "슴슴한입", color: "#20BBAC" },
+    misik: { image: "/assets/misik-card.png", label: "미식고집", color: "#FF4D50" },
 };
 
 const POSITION_STYLES: Record<
@@ -82,7 +82,8 @@ export default function Home() {
         }, {} as Record<CardId, Position>);
     }, [order]);
 
-    const currentTitle = CARDS[order[1]].label;
+    const currentCard = CARDS[order[1]];
+    const currentTitle = currentCard.label;
 
     return (
         <main
@@ -100,7 +101,11 @@ export default function Home() {
 
             {/* Headline */}
             <div className="flex flex-col font-ohsquare mt-[2.4vh] text-center leading-[1] gap-[0.6vh]">
-                <p id="title" className="text-[6.8vh]">
+                <p
+                    id="title"
+                    className="text-[6.8vh]"
+                    style={{ color: currentCard.color }}
+                >
                     {currentTitle}
                 </p>
                 <p className="text-[6.8vh]">먹어봤니</p>

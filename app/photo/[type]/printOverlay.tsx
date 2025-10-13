@@ -15,7 +15,7 @@ export default function PrintOverlay({ imageUrl, qrUrl }: PrintOverlayProps) {
     const bottomOverlayPath = `/print/bottom-left.svg`;
 
     return (
-        <div className="print-only flex flex-col items-center justify-center w-full">
+        <div className="print-only flex flex-col items-center justify-center w-full bg-white">
             <img src={topOverlayPath} />
 
             <img src={imageUrl} alt="photo" />

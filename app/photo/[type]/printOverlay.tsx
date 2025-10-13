@@ -15,26 +15,13 @@ export default function PrintOverlay({ imageUrl, qrUrl }: PrintOverlayProps) {
     const bottomOverlayPath = `/print/bottom-left.svg`;
 
     return (
-        <div className="print-only flex items-center justify-center w-full bg-white p-6">
-            <div className="relative w-full max-w-[2.8in] aspect-[3/4] overflow-hidden">
-                <img
-                    src={imageUrl}
-                    alt="photo"
-                    className="absolute inset-0 h-full w-full object-cover"
-                />
-                <img
-                    src={topOverlayPath}
-                    alt=""
-                    className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-                />
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-4 pb-4">
-                    <img src={bottomOverlayPath} alt="" className="w-[65%]" />
-                    {qrUrl && (
-                        <div className="rounded bg-white p-2">
-                            <QRCodeCanvas value={qrUrl} size={120} />
-                        </div>
-                    )}
-                </div>
+        <div className="print-only flex flex-col items-center justify-center w-full bg-white px-[2.5%] py-[5%]">
+            <img src={topOverlayPath} />
+            <img src={imageUrl} alt="photo" />
+            <div className="flex justify-between w-full">
+                <img src={bottomOverlayPath} alt="" className="w-[70%]" />
+                {/* QR 코드 출력 */}
+                {qrUrl && <QRCodeCanvas value={qrUrl} className="w-[20%]" />}
             </div>
         </div>
     );

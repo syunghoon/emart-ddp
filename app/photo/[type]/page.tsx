@@ -112,7 +112,7 @@ export default function PhotoPage() {
     }, [showPrint, qrUrl]);
 
     return (
-        <main className="relative flex flex-col items-center h-screen bg-[#150348]">
+        <main className="relative flex flex-col items-center h-screen bg-[#150348] print:bg-white">
             {!captured && (
                 <>
                     <div className="relative w-full aspect-[3/4] overflow-hidden">

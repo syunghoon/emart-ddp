@@ -137,11 +137,11 @@ export default function TestPage() {
                 </div>
             </div>
             <div className="w-full mt-[10.2vh]">
-                <p className="text-[3.3vh] font-semibold text-center leading-[1.4]">
+                <p className="text-[3.3vh] font-pretendard font-semibold text-center leading-[1.4]">
                     {questions[index].question}
                 </p>
 
-                <div className="mt-[20vh] flex flex-row justify-center w-[42vh] gap-[1.8vh]">
+                <div className="mt-[20vh] font-pretendard flex flex-row justify-center w-[42vh] gap-[1.8vh]">
                     {choices.map((c) => (
                         <div className="" key={c.value}>
                             <div className="h-[9.6vh] flex items-center justify-center">

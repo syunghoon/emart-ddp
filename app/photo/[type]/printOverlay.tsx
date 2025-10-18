@@ -13,6 +13,7 @@ export default function PrintOverlay({ imageUrl, qrUrl }: PrintOverlayProps) {
     const overlayType = params?.type;
     const topOverlayPath = `/print/top-${overlayType}.svg`;
     const bottomOverlayPath = `/print/bottom-left.svg`;
+    const bottomCaptionPath = `/print/bottom-caption.svg`;
 
     const framePath = `/frame-${params.type}.png`;
 
@@ -41,6 +42,7 @@ export default function PrintOverlay({ imageUrl, qrUrl }: PrintOverlayProps) {
                     </div>
                 )}
             </div>
+            <img src={bottomCaptionPath} />
         </div>
     );
 }

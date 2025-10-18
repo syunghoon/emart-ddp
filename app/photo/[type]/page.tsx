@@ -115,6 +115,15 @@ export default function PhotoPage() {
         <main className="relative flex flex-col items-center h-screen bg-[#150348] print:bg-white print:h-auto">
             {!captured && (
                 <>
+                    {/* 안내 문구 */}
+                    {isReady && (
+                        <div
+                            className=" w-[90%] text-center text-white text-[3vh] font-pretendard z-10 animate-fade  rounded-full 
+                    flex items-center justify-center absolute left-1/2 -translate-x-1/2 top-[5%] px-[1vh] py-[1.5vh] bg-black/20 backdrop-blur-sm border border-white"
+                        >
+                            바닥 스티커 위치에서 촬영해주세요!
+                        </div>
+                    )}
                     <div className="relative w-full aspect-[3/4] overflow-hidden">
                         {/* 웹캠 프리뷰 */}
                         <Webcam

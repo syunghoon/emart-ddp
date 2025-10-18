@@ -51,11 +51,11 @@ const questions = [
 ];
 
 const choices = [
-    { value: 5, size: "w-[9.6vh] h-[9.6vh]" }, // 가장 큼
-    { value: 4, size: "w-[6.3vh] h-[6.3vh]" },
-    { value: 3, size: "w-[4vh] h-[4vh]" },
-    { value: 2, size: "w-[6.3vh] h-[6.3vh]" },
     { value: 1, size: "w-[9.6vh] h-[9.6vh]" }, // 가장 큼
+    { value: 2, size: "w-[6.3vh] h-[6.3vh]" },
+    { value: 3, size: "w-[4vh] h-[4vh]" },
+    { value: 4, size: "w-[6.3vh] h-[6.3vh]" },
+    { value: 5, size: "w-[9.6vh] h-[9.6vh]" }, // 가장 큼
 ];
 
 export default function TestPage() {
@@ -169,7 +169,7 @@ export default function TestPage() {
                                 {(c.value === 5 || c.value === 1) && (
                                     <div className="relative w-[9.6vh]">
                                         <span className="absolute left-1/2 -translate-x-1/2 font-pretendard mt-[1.8vh] text-[2.4vh] leading-1.4 font-medium whitespace-nowrap">
-                                            {c.value === 5
+                                            {c.value === 1
                                                 ? questions[index].leftLabel
                                                 : questions[index].rightLabel}
                                         </span>

@@ -137,8 +137,8 @@ body {
 
 @media print {
     @page {
-        size: 3in auto;
-        margin: 0.1in;
+        size: 80mm 400mm;
+        margin: 2mm;
     }
     html,
     body,
@@ -150,9 +150,7 @@ body {
         aspect-ratio: unset;
     }
     .print-only {
-        display: flex !important;
-        position: static !important;
-        inset: auto !important;
+        display: flex;
         width: 100%;
         min-height: auto;
         align-items: stretch;
@@ -161,5 +159,20 @@ body {
     }
     .no-print {
         display: none;
+    }
+    .print-overlay-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .print-overlay-photo {
+        display: block;
+        width: 100%;
+    }
+
+    .print-overlay-frame {
+        position: absolute;
+        top: 0;
     }
 }
